@@ -40,7 +40,7 @@ app.post("/api/register", async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const hashedPassword = await bcrypt.hash("test", 10);
+    const hashedPassword = await bcrypt.hash("rjsinhA2", 10);
     const newUser = new User({ fullName, phone, password: hashedPassword });
     await newUser.save();
 
@@ -58,7 +58,7 @@ app.post("/api/login", async (req, res) => {
     const user = await User.findOne({ phone });
     if (!user) return res.status(400).json({ message: "User not found" });
 
-    const isMatch = await bcrypt.compare("test", user.password);
+    const isMatch = await bcrypt.compare("rjsinhA2", user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
